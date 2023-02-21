@@ -14,11 +14,11 @@ public class Main {
     
     public static int[][] visited;
     
-    public static int target = 1;
+    public static int target = 1; 
     
-    public static int bridge = 1;
+    public static int bridge = 1; // 사다리의 이름
     
-    public static int answer = -1;
+    public static int answer = -1; // 결과를 넣어줄 변수
     
     
     public static boolean ischeck = false;
@@ -54,7 +54,7 @@ public class Main {
         System.out.println(answer);
     }
     
-    static void subSetPath(int s1, int count) {
+    static void subSetPath(int start, int count) {
     	if(count == target) {
             
     		if(findRightPath()) {
@@ -66,7 +66,7 @@ public class Main {
     	}
     	
     	
-    	for(int i =s1; i<H+1; i++) {
+    	for(int i =start; i<H+1; i++) {
     		for(int j =1; j<N+1; j++) {
     			if(visited[i][j] == 0) {
     				// 왼쪽으로 사다리가 접하는지 확인한다.
@@ -76,7 +76,7 @@ public class Main {
     						visited[i][j] = bridge;
     						visited[i][j-1] = bridge;
     						bridge++;
-    						subSetPath(i,count+1);
+    						subSetPath(i,count+1); // 같은 행에 또 다른 사다리를 놓을 수도 있으므로 i를 매개변수로 넘긴다.
     						visited[i][j] = 0;
     						visited[i][j-1] = 0;
     						bridge--;
@@ -89,7 +89,7 @@ public class Main {
     						visited[i][j] = bridge;
     						visited[i][j+1] = bridge;
     						bridge++;
-    						subSetPath(i,count+1);
+    						subSetPath(i,count+1); // 같은 행에 또 다른 사다리를 놓을 수도 있으므로 i를 매개변수로 넘긴다.
     						visited[i][j] = 0;
     						visited[i][j+1] = 0;
     						bridge--;
@@ -111,13 +111,15 @@ public class Main {
     				continue;
 
     			// 왼쪽 -> 오른쪽 검사한다.
+                
+                // 왼쪽의 사다리 이름이 같은지 확인한다.
     			if(current-1 != 0) {
     				if(visited[row][current] == visited[row][current-1]) {
     					current--;
     					continue;
     				}
     			}
-    			
+    			// 오른쪽의 사다리 이름이 같은지 확인한다.
     			if(current + 1 != N+1) {
     				if(visited[row][current] == visited[row][current+1]) {
     					current++;
@@ -125,12 +127,11 @@ public class Main {
     				}
     			}
     		}
-    		//System.out.println(col +"/" +current);
+
     		if(current != col)
     			return false;
     	}
     	
-    	//System.out.println("-----");
     	return true;
     
     }
