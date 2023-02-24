@@ -17,14 +17,14 @@ import java.util.TreeSet;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+// 자음을 뽑는 메소드를 호출하고 자음을 뽑는 메소드에서 모음을 뽑는 메소드를 호출하는 방식이다.
 
 public class Main {
 
 	public static int L,C;
 	
-	public static int idx;
-	
 	public static int cnt1, cnt2; // 자음의 수, 모음의 수
+	
 	public static List<Character> alphabet1, alphabet2; // 자음을 담을 리스트, 모음을 담을 리스트
 	
 	public static char[] password;
@@ -33,7 +33,7 @@ public class Main {
 	
 	public static List<String> result = new ArrayList<>();
 
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
@@ -70,10 +70,8 @@ public class Main {
 		for(int i = 1; i<=L-2; i++) {
 			// 모음의 수는 항상 1보다 크거나 같고
 			if(2 <= L-i) { // 자음의 수가 2보다 크거나 같으면?
-				//System.out.println((L-i)+","+i); 
 				makePassword(0, L-i); // 자음의 수를 넘긴다.
 			}
-			//System.out.println("--------------------------");
 		}
 		
 		Collections.sort(result);
@@ -83,33 +81,24 @@ public class Main {
 		
 	}
 	
-	static void makePassword(int count, int c1) { // 자음의 수, 모음의 수
-		idx = 0;
-		makeConsonant(c1,0,0, new ArrayList<Character>()); // 자음 // c1개의 알파벳을 고른다
-
+	static void makePassword(int count, int c) { // 자음의 수
+		makeConsonant(c,0,0, new ArrayList<Character>()); // 자음 // c1개의 알파벳을 고른다
 	}
 	
 	static void makeVowel(int target, int count, int start, ArrayList<Character> str) {
 		if(target == count) {
+			// 깊은 복사
 			ArrayList<Character> temp = new ArrayList<>();
 			
 			temp.addAll(str);
 			
 			Collections.sort(temp);
 			
-			//System.out.println(temp);
-			
 			String s = "";
 			for(int i =0; i<temp.size(); i++)
 				s += temp.get(i);
 			result.add(s);
-			
-			//Collections.sort(str);
-			
-			//System.out.println(str);
-			//Arrays.sort(password);
-			
-			//System.out.println("정렬 : "+Arrays.toString(password));
+		
 			return;
 		}
 		for(int i =start; i<cnt2; i++) {
@@ -126,6 +115,8 @@ public class Main {
 			}
 		}
 	}
+	
+	
 	// target개의 자음을 뽑는다.
 	static void makeConsonant(int target,int count, int start, ArrayList<Character> str) {
 		if(target == count) {
