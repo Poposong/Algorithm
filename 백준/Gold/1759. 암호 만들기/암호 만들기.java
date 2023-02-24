@@ -1,103 +1,153 @@
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
-/*
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
-첫째 줄에 두 정수 L, C가 주어진다. (3 ≤ L ≤ C ≤ 15) 다음 줄에는 C개의 문자들이 공백으로 구분되어 주어진다. 주어지는 문자들은 알파벳 소문자이며, 중복되는 것은 없다.
 
-최소 한 개의 모음(a, e, i, o, u)과 최소 두 개의 자음
-
-4 6
-a t c i s w
-
- * */
 public class Main {
-	
+
 	public static int L,C;
 	
-	public static char[] word;
+	public static int idx;
 	
-	public static boolean[] isSelected;
+	public static int cnt1, cnt2; // 자음의 수, 모음의 수
+	public static List<Character> alphabet1, alphabet2; // 자음을 담을 리스트, 모음을 담을 리스트
 	
-	public static List<String> result = new ArrayList<String>();
+	public static char[] password;
 	
-	public static void main(String[] args) throws Exception {
-		
+	public static boolean[] visited1, visited2; // 자음의 방문 체크, 모음의 방문 체크
+	
+	public static List<String> result = new ArrayList<>();
 
+	
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
+		
 		String[] str = br.readLine().split(" ");
 		L = Integer.parseInt(str[0]);
 		C = Integer.parseInt(str[1]);
 		
-
+		password = new char[L];
+		
 		str = br.readLine().split(" ");
 		
-		word = new char[C];
+		alphabet1 = new ArrayList<>();
+		alphabet2 = new ArrayList<>();
 		
-		isSelected = new boolean[C];
 		
-		for(int i =0; i<C; i++) {
+		for(int i = 0; i<C; i++) {
 			char c = str[i].charAt(0);
-			word[i] = c;
+			// 모음을 담는다.
+			if(c == 'a' || c == 'e' ||
+					c == 'i' || c == 'o' || c == 'u') {
+				alphabet2.add(c);
+			}else // 자음을 담는다.
+				alphabet1.add(c);
 		}
-
-		Arrays.sort(word);
 		
-		//System.out.println(word);
+		cnt1 = alphabet1.size();
+		cnt2 = alphabet2.size();
 		
-		perm(0, 0, "");
-	
 		
-		//System.out.println(result);
+		visited1 = new boolean[cnt1];
+		visited2 = new boolean[cnt2];
 		
-		for(int i =0; i<result.size(); i++)
-			sb.append(result.get(i)+"\n");
-		
-		System.out.println(sb.toString());
-		
- 	}
-	
-	static void perm(int start, int cnt, String str) {
-		if(cnt == L) {
-			if(!result.contains(str)) {
-				
-				if(isCheck(str)) {
-					
-					result.add(str);
-				}
-					
+		for(int i = 1; i<=L-2; i++) {
+			// 모음의 수는 항상 1보다 크거나 같고
+			if(2 <= L-i) { // 자음의 수가 2보다 크거나 같으면?
+				//System.out.println((L-i)+","+i); 
+				makePassword(0, L-i); // 자음의 수를 넘긴다.
 			}
+			//System.out.println("--------------------------");
+		}
+		
+		Collections.sort(result);
+		
+		for(String s : result)
+			System.out.println(s);
+		
+	}
+	
+	static void makePassword(int count, int c1) { // 자음의 수, 모음의 수
+		idx = 0;
+		makeConsonant(c1,0,0, new ArrayList<Character>()); // 자음 // c1개의 알파벳을 고른다
+
+	}
+	
+	static void makeVowel(int target, int count, int start, ArrayList<Character> str) {
+		if(target == count) {
+			ArrayList<Character> temp = new ArrayList<>();
+			
+			temp.addAll(str);
+			
+			Collections.sort(temp);
+			
+			//System.out.println(temp);
+			
+			String s = "";
+			for(int i =0; i<temp.size(); i++)
+				s += temp.get(i);
+			result.add(s);
+			
+			//Collections.sort(str);
+			
+			//System.out.println(str);
+			//Arrays.sort(password);
+			
+			//System.out.println("정렬 : "+Arrays.toString(password));
 			return;
 		}
-		for(int i =start; i<C; i++) {
-			if(!isSelected[i]) {
-				isSelected[i] = true;
-				perm(i+1, cnt+1, str+word[i]);
-				isSelected[i] = false;
+		for(int i =start; i<cnt2; i++) {
+			if(!visited2[i]) {
+				visited2[i] = true;
+
+				str.add(alphabet2.get(i));
+				
+				makeVowel(target, count+1, i+1, str);
+				
+				str.remove(str.size()-1);
+				
+				visited2[i] = false;
 			}
 		}
-		
 	}
-	
-	static boolean isCheck(String str) {
-		int cnt1 = 0, cnt2 = 0;
-		for(int i =0; i<str.length(); i++) {
-			char c = str.charAt(i);
-			if('a' == c || 'e' == c || 'i' == c || 'o' == c || 'u' == c)
-				cnt1++;
-			else
-				cnt2++;
+	// target개의 자음을 뽑는다.
+	static void makeConsonant(int target,int count, int start, ArrayList<Character> str) {
+		if(target == count) {
+			
+			makeVowel(L-target,0,0,str);
+			
+			return;
 		}
-		
-		if(cnt1 >= 1 && cnt2 >= 2)
-			return true;
-		else
-			return false;
+	
+		for(int i =start; i<cnt1; i++) {
+			if(!visited1[i]) {
+				visited1[i] = true;
+				
+				str.add(alphabet1.get(i));
+
+				makeConsonant(target, count+1, i+1 ,str);
+				
+				str.remove(str.size()-1);
+				
+				visited1[i] = false;
+			}
+		}
 	}
-	
-	
+
 }
