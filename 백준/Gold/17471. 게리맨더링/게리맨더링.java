@@ -56,7 +56,7 @@ public class Main {
 		}
 
 		// 1~N-1개의 부분집합을 형성한다.
-		for(int i = 1; i<N; i++) {
+		for(int i = 1; i<=N/2; i++) {
 			Arrays.fill(visited, false);
 			target = i;
 			
