@@ -16,8 +16,6 @@ class Solution {
             
             num = Integer.parseInt(str[1]);
             
-            //System.out.println(data);
-            
             if(str[0].equals("I")){
                 data.add(num);
             }else{ // D
@@ -32,8 +30,6 @@ class Solution {
             }
         }
         
-        //System.out.println(data);
-        
         if(data.isEmpty()){
             answer[0] = 0;
             answer[1] = 0;
@@ -44,9 +40,7 @@ class Solution {
             answer[0] = data.get(data.size()-1);
             answer[1] = data.get(0);
         }
-        
-        
-        
+
         return answer;
     }
     
