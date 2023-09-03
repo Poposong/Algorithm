@@ -511,11 +511,11 @@ Empty
 </ol>
 </div>
 
-## 풀이
-### BFS를 사용했다가 20점에서 막혀서 DP를 사용해서 풀었다.
-### 주의! 여기서는 에어컨이라고 말했지만 사실 냉방/난방 모두 가능한 부분이다. 이 부분을 체크해서 풀어야함.....
-<img src="https://github.com/Poposong/Algorithm/assets/81174840/61c0802b-3f8a-4655-9a7b-0e0dbb3ebdcc" style="width:100px; height:100px"/>
-<img src="https://github.com/Poposong/Algorithm/assets/81174840/5b7fe2ff-c1f8-41e0-844d-637af9e425ce" style="width:100px; height:100px"/>
+### ✔️ 풀이
+BFS를 사용했다가 20점에서 막혀서 DP를 사용해서 풀었다.
+주의! 여기서는 에어컨이라고 말했지만 사실 냉방/난방 모두 가능한 부분이다. 이 부분을 체크해서 풀어야함.....
+<img src="https://github.com/Poposong/Algorithm/assets/81174840/61c0802b-3f8a-4655-9a7b-0e0dbb3ebdcc" style="width:200px; height:200px"/>
+<img src="https://github.com/Poposong/Algorithm/assets/81174840/5b7fe2ff-c1f8-41e0-844d-637af9e425ce" style="width:200px; height:200px"/>
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
