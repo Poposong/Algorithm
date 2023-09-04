@@ -58,5 +58,5 @@ A 나라와 B 나라가 싸우고 있는 이 세계는 2 차원 공간으로 이
 위 그림과 같이 최소 세 번의 요격 미사일 발사로 전부 방어할 수 있습니다.</p>
 
 ### ✔️풀이
-<img src="https://github.com/Poposong/Algorithm/assets/81174840/7614607e-db46-4c2c-ae2a-1b74cc76befb" />
+<img src="https://github.com/Poposong/Algorithm/assets/81174840/7614607e-db46-4c2c-ae2a-1b74cc76befb" style="width:200px; height:200px;"/>
 
