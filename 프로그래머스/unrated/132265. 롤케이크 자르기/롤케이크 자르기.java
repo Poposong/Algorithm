@@ -3,56 +3,51 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] topping) {
-        int answer = -1;
+        int answer = 0;
         
+        // 최대 원소를 찾는다.
         int maxNum = -1;
-        
         for(int num : topping){
             maxNum = Math.max(maxNum, num);
         }
         
-        int[] current = new int[maxNum+1];
+        int[] lastBread = new int[maxNum+1]; // 제일 마지막까지 갔을 때 각 인덱스마다의 빵 개수
         
-        int[] count = new int[topping.length+1];
+        int[] breadType = new int[topping.length+1]; // 각 인덱스까지 빵의 종류 수
         
-        
-        int totalCount = 0;
         
         int num;
-        
+        int totalCount = 0;
         for(int i =0; i<topping.length; i++){
             num = topping[i];
             
-            if(current[num] == 0)
+            if(lastBread[num] == 0)
                 totalCount++;
             
-            count[i] = totalCount;
+            breadType[i] = totalCount;
             
-            current[num]++;
+            lastBread[num]++;
             
             maxNum = Math.max(maxNum, num);
         }
         
-        // totalCount
         int currentCount = 0;
         boolean ischeck = false;
         for(int i = 0; i<topping.length; i++){
             num = topping[i];
             
-            if(current[num]!=0){
-                current[num]--;
-                if(current[num]==0){
+            if(lastBread[num]!=0){
+                lastBread[num]--;
+                if(lastBread[num]==0){
                     totalCount--;
                 }
             }
-         //   System.out.println(i+"->");
-            if(count[i] == totalCount){
-                if(answer == -1){
-                    answer = 1;
+   
+            if(breadType[i] == totalCount){
+                if(answer == 0){
                     ischeck = true;
-                }else{
-                    answer++;
                 }
+                answer++;
             }else{
                 if(ischeck)
                     break;
@@ -63,7 +58,5 @@ class Solution {
             return answer;
         else
             return 0;
-        
-     
     }
 }
