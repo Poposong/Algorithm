@@ -7,7 +7,6 @@ public class Main {
     static int N;
     static ArrayList<Integer>[] numberList;
     static int[] result;
-
     static boolean[][] visited;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,6 +27,7 @@ public class Main {
         }
 
         dfs(1, 0);
+
         System.out.println(-1);
 
     }
@@ -41,16 +41,16 @@ public class Main {
             }
             System.out.println(sb.toString());
             System.exit(0);
+            return;
         }
 
-        for(int i = 1; i<10; i++){
-            if(prev != i && !visited[idx+1][i] && numberList[idx].contains((Integer)i)){
-                result[idx] = i;
-                visited[idx+1][i] = true;
-                dfs(idx+1, i);
+        for(int current : numberList[idx]){
+            if(prev != current && !visited[idx+1][current]){
+                visited[idx+1][current] = true;
+                result[idx] = current;
+                dfs(idx+1, current);
             }
         }
-
     }
 
 }
