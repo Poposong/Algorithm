@@ -1,8 +1,10 @@
+package org.example.bj;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class BJ_공통부분문자열 {
 	static String s1, s2;
 	static int[][] map;
 	public static void main(String[] args) throws IOException{
