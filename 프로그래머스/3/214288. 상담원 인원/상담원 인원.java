@@ -1,23 +1,17 @@
 import java.io.*;
 import java.util.*;
-// 조합
-// 상담 진행하기(선생님 대기 오름차순) 
-    // 학생이 들어왔을 때 선생님의 시간보다 작으면 대기 => 
+ 
 
 class Solution {
-    static boolean[] visited;
     static int[] room;
-    static int target;
-    static int answer;
+    static int target, answer;
     public int solution(int k, int n, int[][] reqs) {
         answer = Integer.MAX_VALUE;
         
         room = new int[k+1]; // 1~k까지의 방
         Arrays.fill(room, 1);
-
-        visited = new boolean[n+1]; // 1~n까지의 선생님 방문 체크
         
-        target = n-k; // 0이상
+        target = n-k; 
         makeRoom(0, k, n, 1, reqs);
         
         return answer;
@@ -59,16 +53,13 @@ class Solution {
     }
     
     static void makeRoom(int count, int k, int n, int idx, int[][] reqs){
-        if(target == count){ // 선생님을 다 뽑았다.
-           // System.out.println(Arrays.toString(room));
-
+        if(target == count){ 
             // 효율성 체크  
             minRoomCheck(k, n, reqs);
-
             return;            
         }
 
-        for(int i = idx; i<k+1; i++){ // 방을 고른다.
+        for(int i = idx; i<k+1; i++){
             room[i]++;
             makeRoom(count+1, k, n, i, reqs);
             room[i]--;
