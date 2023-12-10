@@ -5,6 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+// 시간복잡도 : O(n)
+// 1<= k <= 100
+// n=4
+// 따라서, O(n * k) = O(4n) => O(n) 이다.
+
+
 public class Main {
     static HashMap<Integer, LinkedList<Integer>> roar;
     static boolean[] visitedRoar;
