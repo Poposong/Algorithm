@@ -1,3 +1,5 @@
+package Baekjoon;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +9,9 @@ import java.util.HashMap;
 
 // CCTV의 좌표와 어떤 CCTV인지 모두 구한다. ex) (2,4)에 있는 3번 CCTV
 // 조합으로 각 자리에서 해당 방향으로 모두 X하기
-
+// 시간복잡도
+// O(N*M) + O(4^8 * (4*8)) => CCTV는 최대 8개이고 1<= N, M <=8이고 각 CCTV에서 최대 방향의 수는 4이다.
+// 따라서, O(4^8 * (4*8)) 이다.
 class Node{
     int cctvNumber;
     int x;
@@ -20,7 +24,7 @@ class Node{
     }
 }
 
-public class Main {
+public class BJ_15683_감시 {
     static int N, M, zero;
     static int[][] map;
     static boolean[][] visited;
@@ -52,14 +56,14 @@ public class Main {
 
 
         cctvList.put(2, new HashMap<>());
-        cctvList.get(2).put(0, new ArrayList<>(Arrays.asList(0, 2)));
+        cctvList.get(2).put(0, new ArrayList<>(Arrays.asList(0, 2))); // 2번 CCTV는 0, 2번 방향으로 가는 경우가 있다.
         cctvList.get(2).put(1, new ArrayList<>(Arrays.asList(1, 3)));
 
         cctvList.put(3, new HashMap<>());
         cctvList.get(3).put(0, new ArrayList<>(Arrays.asList(0, 1)));
         cctvList.get(3).put(1, new ArrayList<>(Arrays.asList(1, 2)));
         cctvList.get(3).put(2, new ArrayList<>(Arrays.asList(2, 3)));
-        cctvList.get(3).put(3, new ArrayList<>(Arrays.asList(3, 0)));
+        cctvList.get(3).put(3, new ArrayList<>(Arrays.asList(3, 0)));// 3번 CCTV는 3, 0번 방향으로 가는 경우가 있다.
 
         cctvList.put(4, new HashMap<>());
         cctvList.get(4).put(0, new ArrayList<>(Arrays.asList(1, 2, 3)));
@@ -94,8 +98,6 @@ public class Main {
 
         choiceNumberArray(0);
 
-        //System.out.println(zero+","+count);
-
         System.out.println(zero-count);
 
     }
@@ -107,7 +109,6 @@ public class Main {
             for(int i = 0; i<N; i++){
                 Arrays.fill(visited[i], false);
             }
-
 
             int sum = 0;
             for(int i =0; i<nodeList.size(); i++){
