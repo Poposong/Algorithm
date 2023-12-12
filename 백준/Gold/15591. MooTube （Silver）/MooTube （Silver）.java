@@ -1,8 +1,22 @@
+package Baekjoon;
+
 import java.io.*;
 import java.util.*;
 
+// [시간복잡도 풀이]
+// DFS는 그래프를 인접행렬로 구현하는지? 인접리스트로 구현하는지? 에 따라서 시간복잡도가 다르다.
+// 인접행렬로 구현하는 경우 => O(n^2)
+// 인접리스트로 구현하는 경우 => 만약, 모든 정점과 간선을 다 방문한 경우에는 O(정점+간선) = O(n+e)가 된다.
 
-public class Main {
+// 아래 문제에서 정점인 N은 최악의 경우 5000개가 생성될 수 있고 간선은 N-1개인 4999개가 생성될 수 있다.
+// 이때, 인접행렬로 구현하면 O(5000*5000)이고 인접리스트는 O(5000+4999)이다.
+// 따라서, 인접리스트로 구현했다. O(25,000,000) > O(9999)
+
+// DFS가 최대 Q번(5,000)번 돌려질 수 있으므로
+// 최종 시간복잡도는 O(Q * (n+e)) = O(5000 * 9999)이다.
+// 49,995,000<200,000,000 이므로 해당 코드가 시간 안에 들어올 수 있다.
+
+public class BJ_15591_MooTube {
     static int N, Q;
     static Map<Integer, LinkedList<int[]>> graph;
     static boolean[] visited;
@@ -40,11 +54,11 @@ public class Main {
             str = br.readLine().split(" ");
             k = Integer.parseInt(str[0]);
             v = Integer.parseInt(str[1]);
-            
+
             result = 0;
             Arrays.fill(visited, false);
             visited[v] = true;
-            
+
             moveVertex(k, v);
             sb.append(result).append("\n");
         }
