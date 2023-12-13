@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-// 시간복잡도 : O(N+M*repeatNumber) = O(100 + 100*100) ~ O(100,000)
+// 시간복잡도 : O(N+M*repeatNumber) = O(100 + 100*100) = O(100,100)
 public class Main {
     static int A,B,N,M;
     static Map<Integer, int[]> robots;
