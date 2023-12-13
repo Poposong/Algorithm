@@ -1,3 +1,5 @@
+package Baekjoon;
+
 import java.io.*;
 import java.util.*;
 
@@ -18,7 +20,7 @@ import java.util.*;
 // 위 코드의 시간복잡도를 계산하면 K*(bfs의 시간복잡도 + K(K-1)/2) 이다.
 // 따라서, k^3 + k*n^2 = 100^3 + 100^3 = 200만이다. < 2억
 
-public class Main {
+public class BJ_14466_소가_길을_건너간_이유6 {
     static int N, K, R;
 
     static boolean[][][][] roadVisible;
