@@ -1,12 +1,25 @@
 import java.io.*;
 import java.util.*;
 
-// NxN : 목초지의 크기
-// K : 소의 수
-// R : 길의 수
+// 방향이 중요한 경우였기 때문에 roadVisible을 4차원으로 만들어서 시작하는 좌표 -> 도착하는 좌표의 방향을 저장했다. 방향이 곧 길이기 때문에
+// N과 K는 최대 100까지 가능함
+/*
+        int result = 0;
+        for(int i = 0; i<K; i++){
+            bfs(cow[i][0], cow[i][1]);
+            for(int j = i+1; j<K; j++){
+                if(!visited[cow[j][0]][cow[j][1]]){ // 다리를 건너야만 갈 수가 있는 경우
+                    result++;
+                }
+            }
+        }
+*/
+
+// 위 코드의 시간복잡도를 계산하면 K*(bfs의 시간복잡도 + K(K-1)/2) 이다.
+// 따라서, k^3 + k*n^2 = 100^3 + 100^3 = 200만이다. < 2억
+
 public class Main {
     static int N, K, R;
-    static boolean[][][] roadGraph;
 
     static boolean[][][][] roadVisible;
 
@@ -24,10 +37,7 @@ public class Main {
         K = Integer.parseInt(str[1]);
         R = Integer.parseInt(str[2]);
 
-        roadGraph = new boolean[N+1][N+1][R+1];
-
         visited = new boolean[N+1][N+1];
-
         roadVisible = new boolean[N+1][N+1][N+1][N+1];
 
 
@@ -40,16 +50,12 @@ public class Main {
             r2 = Integer.parseInt(str[2]);
             c2 = Integer.parseInt(str[3]);
 
-            roadGraph[r1][c1][i+1] = true;
-            roadGraph[r2][c2][i+1] = true;
-
             roadVisible[r1][c1][r2][c2] = true;
             roadVisible[r2][c2][r1][c1] = true;
-
         }
 
-        cow = new int[K][2];
         // K줄에는 소의 위치가 주어진다.
+        cow = new int[K][2];
         for(int i = 0; i<K; i++){
             str = br.readLine().split(" ");
             cow[i][0] = Integer.parseInt(str[0]);
