@@ -1,7 +1,13 @@
+package Baekjoon;
+
 import java.io.*;
 import java.util.*;
 
-public class Main {
+// 시간복잡도
+// while문에서 arraylist로 구현하면 10,000 * 10,000 * 1 이고
+// linkedlist로 구현하면 10,000 * 10,000 * (10,000*50) 이다.
+// 따라서, arrayList로 구현해야한다.
+public class BJ_1092_배 {
     static int N,M;
     static ArrayList<Integer> crain, box;
     public static void main(String[] args) throws IOException {
@@ -30,16 +36,16 @@ public class Main {
 
         int time = 0;
         int boxIdx, crainIdx;
-        while(!box.isEmpty()){
+        while(!box.isEmpty()){ // M번
             boxIdx = 0;
             crainIdx = 0;
 
-            while(crainIdx < N){
+            while(crainIdx < N){ // M번
                 if(boxIdx == box.size())
                     break;
 
-                if(crain.get(crainIdx) >= box.get(boxIdx)){
-                    box.remove(boxIdx);
+                if(crain.get(crainIdx) >= box.get(boxIdx)){ // arrayList : O(1) , arrayList :  O(n*m)
+                    box.remove(boxIdx); // arrayList : O(n), arrayList : O(n)
                     crainIdx++;
                 }else{
                     boxIdx++;
