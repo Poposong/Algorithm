@@ -1,7 +1,16 @@
+package Baekjoon;
+
 import java.io.*;
 import java.util.*;
 
-public class Main {
+// [시간복잡도]
+// 분할정복으로 푸는 문제
+// 2<=N<=5, B는 최대 1000억
+// 분할정복의 시간복잡도는 log(B) = log(1000억)은 대략 25.xx
+// 두 행렬을 곱하는 시간복잡도는 log(N^3) = log(125)
+// 따라서, 125*25.xx 이다.
+
+public class BJ_10830_행렬제곱 {
     static int N;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
