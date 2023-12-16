@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+
 class Solution {
     public int solution(int[][] routes) {
         int answer = 0;
@@ -8,6 +9,7 @@ class Solution {
         if(routes.length == 1)
             return 1;
         
+        // O(10,000log(10,000))        
         Arrays.sort(routes, new Comparator<int[]>(){
             public int compare(int[] a, int[] b){
                 if(a[0] == b[0]){
@@ -16,8 +18,8 @@ class Solution {
                 return a[0]-b[0]; // 오름차순
             }
         });
-        //System.out.println(r1+","+r2);
-        
+     
+        // O(10,000)
         int r1 = routes[0][0], r2 = routes[0][1];
         int n1, n2;
         for(int i = 1; i<routes.length; i++){
