@@ -16,7 +16,7 @@ public class Main {
             return;
         }
 
-        visited[A][B] = true;
+        setState(A, B, true);
 
         calculator(A,B,C);
 
@@ -31,20 +31,22 @@ public class Main {
         if(find){
             return;
         }
+
         if(A==B && B==C){
             find=true;
             return;
         }
+
         int idx;
         if(A!=B){
             if(A<B){
-                if(!visited[A+A][B-A]){
-                    visited[A+A][B-A] = true;
+                if(!visited[A+A][B-A] && !visited[B-A][A+A]){
+                    setState(A+A, B-A, true);
                     calculator(A+A, B-A, C);
                 }
             }else{
-                if(!visited[A-B][B+B]){
-                    visited[A-B][B+B] = true;
+                if(!visited[A-B][B+B] && !visited[B+B][A-B]){
+                    setState(A-B, B+B, true);
                     calculator(A-B, B+B, C);
                 }
             }
@@ -52,13 +54,13 @@ public class Main {
 
         if(A!=C){
             if(A<C){
-                if(!visited[A+A][B]){
-                    visited[A+A][B] = true;
+                if(!visited[A+A][B] && !visited[B][A+A]){
+                    setState(A+A, B, true);
                     calculator(A+A, B, C-A);
                 }
             }else{
-                if(!visited[A-C][B]){
-                    visited[A-C][B] = true;
+                if(!visited[A-C][B] && !visited[B][A-C]){
+                    setState(A-C, B, true);
                     calculator(A-C, B, C+C);
                 }
             }
@@ -66,13 +68,13 @@ public class Main {
 
         if(B!=C){
             if(B<C){
-                if(!visited[A][B+B]){
-                    visited[A][B+B] = true;
+                if(!visited[A][B+B] && !visited[B+B][A]){
+                    setState(A, B+B, true);
                     calculator(A, B+B, C-B);
                 }
             }else{
-                if(!visited[A][B-C]){
-                    visited[A][B-C] = true;
+                if(!visited[A][B-C] && !visited[B-C][A]){
+                    setState(A, B-C, true);
                     calculator(A, B-C, C+C);
                 }
             }
@@ -81,4 +83,18 @@ public class Main {
 
 
     }
+
+    static void setState(int A, int B, boolean state){
+        visited[A][B] = state;
+        visited[B][A] = state;
+    }
+
+    static boolean getState(int A, int B){
+        if(visited[A][B] || visited[B][A]){
+            return false;
+        }
+        return true;
+    }
+
+
 }
