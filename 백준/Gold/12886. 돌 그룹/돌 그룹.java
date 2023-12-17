@@ -1,5 +1,10 @@
 import java.io.*;
 import java.util.*;
+
+// 시간복잡도
+// DFS이므로 O(1501*1501) 이다 <2억
+
+// A,B를 구하면 C는 자동으로 숫자가 정해지기 때문에 신경쓰지 않아도 괜찮다.
 public class Main {
     static boolean[][] visited;
     static boolean find;
@@ -40,12 +45,12 @@ public class Main {
         int idx;
         if(A!=B){
             if(A<B){
-                if(!visited[A+A][B-A] && !visited[B-A][A+A]){
+                if(!visited[A+A][B-A]){
                     setState(A+A, B-A, true);
                     calculator(A+A, B-A, C);
                 }
             }else{
-                if(!visited[A-B][B+B] && !visited[B+B][A-B]){
+                if(!visited[A-B][B+B]){
                     setState(A-B, B+B, true);
                     calculator(A-B, B+B, C);
                 }
@@ -54,12 +59,12 @@ public class Main {
 
         if(A!=C){
             if(A<C){
-                if(!visited[A+A][B] && !visited[B][A+A]){
+                if(!visited[A+A][B]){
                     setState(A+A, B, true);
                     calculator(A+A, B, C-A);
                 }
             }else{
-                if(!visited[A-C][B] && !visited[B][A-C]){
+                if(!visited[A-C][B]){
                     setState(A-C, B, true);
                     calculator(A-C, B, C+C);
                 }
@@ -68,12 +73,12 @@ public class Main {
 
         if(B!=C){
             if(B<C){
-                if(!visited[A][B+B] && !visited[B+B][A]){
+                if(!visited[A][B+B]){
                     setState(A, B+B, true);
                     calculator(A, B+B, C-B);
                 }
             }else{
-                if(!visited[A][B-C] && !visited[B-C][A]){
+                if(!visited[A][B-C]){
                     setState(A, B-C, true);
                     calculator(A, B-C, C+C);
                 }
@@ -88,13 +93,4 @@ public class Main {
         visited[A][B] = state;
         visited[B][A] = state;
     }
-
-    static boolean getState(int A, int B){
-        if(visited[A][B] || visited[B][A]){
-            return false;
-        }
-        return true;
-    }
-
-
 }
