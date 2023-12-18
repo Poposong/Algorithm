@@ -1,8 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-// 정점의 수만큼 edge를 다 계산한다 (nm)
-// 간선
+// 정점의 수만큼 edge를 다 계산한다 O(nm) → 정점의 마지막을 도는 경우에 최단 거리가 바뀌는 경우에는 음수 사이클이 존재한다고 볼 수 있다.
 public class Main {
     static long INF;
     public static void main(String[] args) throws IOException{
