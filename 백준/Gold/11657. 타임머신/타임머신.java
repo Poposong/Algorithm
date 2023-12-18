@@ -12,7 +12,7 @@ public class Main {
         n = Integer.parseInt(str[0]);
         m = Integer.parseInt(str[1]);
 
-        INF = Long.MAX_VALUE;
+        INF = Long.MAX_VALUE; // 10000 * 6000 * 500은 정수의 범위를 벗어남
 
         long[] vertex = new long[n+1];
         List<int[]> edge = new ArrayList<>();
@@ -29,6 +29,8 @@ public class Main {
 
         vertex[1] = 0;
 
+        // O(nm)
+        // 이때, n번째 즉, 마지막에도 간선의 최단거리가 변경될 때에는 사이클이 존재하는 것이다.
         for(int i =1; i<n+1; i++){
             for(int j = 0; j<m; j++){
                 a = edge.get(j)[0];
@@ -39,7 +41,7 @@ public class Main {
 
                 if(vertex[a]+c < vertex[b]){
                     vertex[b] = vertex[a]+c;
-                    if(i == n){
+                    if(i == n){ // 음수 사이클이 발생함
                         System.out.println(-1);
                         return;
                     }
