@@ -1,15 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-class Nodes{
-    int number;
-    long weight;
+// 플로이드워셜
+// 시간복잡도 : O(V^3) = 400*400*400
 
-    public Nodes(int number, long weight){
-        this.number=number;
-        this.weight=weight;
-    }
-}
 public class Main {
     static int v, e;
     static long result;
@@ -33,6 +27,7 @@ public class Main {
             minPath[Integer.parseInt(str[0])][Integer.parseInt(str[1])] = Integer.parseInt(str[2]);
         }
 
+        // i->k + k->j
         for(int k = 1; k<v+1; k++){
             for(int i =1; i<v+1; i++){
                 for(int j = 1; j<v+1; j++){
