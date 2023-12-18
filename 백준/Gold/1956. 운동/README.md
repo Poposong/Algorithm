@@ -30,3 +30,17 @@
 
  <p>첫째 줄에 최소 사이클의 도로 길이의 합을 출력한다. 운동 경로를 찾는 것이 불가능한 경우에는 -1을 출력한다.</p>
 
+<hr>
+
+## 풀이
+
+- 다익스트라의 시간 복잡도는 O(ElogV)이다. 여기서는 V번 반복하므로 O(VElogV)이고 E의 최대는 V^2과 가깝기 때문에 최종 시간 복잡도는 O(V^3logV)이다.
+- 플로이드 워셜의 시간 복잡도는 O(V^3)이다.
+따라서, 플로이드 워셜의 효율성이 더 높다.
+
+### 1. 다익스트라
+![image](https://github.com/Poposong/Algorithm/assets/81174840/85e92f95-68cc-41ff-a4d2-2944ea4cb084)
+
+### 2. 플로이드 워셜
+![image](https://github.com/Poposong/Algorithm/assets/81174840/c6fad23c-63d9-4882-87a7-683bb76ad26b)
+
