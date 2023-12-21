@@ -1,6 +1,11 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
-public class Main {
+
+// 가장 큰 점수를 구할 때, 영향을 미치는 것이 m의 수와 해당 정점까지 더한 기내식의 점수 합이다.
+// 따라서, 두 가지의 경우를 고려할 때 dp를 사용해서 풀어야했다.
+// row : 정점 인덱스, col : 사용한 m의 수
+public class BJ_2157_여행 {
     static int N, M, K;
     static int[][] graph;
     static int[][] dp;
@@ -45,10 +50,6 @@ public class Main {
             result = Math.max(result, dp[N][i]);
         }
         System.out.println(result);
-
-
-
-
     }
 
 }
