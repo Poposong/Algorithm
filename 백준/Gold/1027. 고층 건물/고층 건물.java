@@ -1,6 +1,8 @@
 import java.io.*;
 
 // 시간복잡도 : O(n^2)
+// 왼쪽에는 계산을 하지 않아도 괜찮다.
+// 오른쪽에서 꾸준히 증가하는 높이가 아닌 낮은 높이가 나오다가 다시 높은 높이가 나올 수도 있다.
 public class Main {
     static int[] height;
     static int[] answer;
@@ -13,7 +15,7 @@ public class Main {
         for(int i = 1; i<N+1; i++){
             height[i] = Integer.parseInt(str[i-1]);
         }
-        
+
         double r1, r2;
         for(int i = 1; i<N; i++){
             r1 = calculator(i, height[i], i+1, height[i+1]);
@@ -35,7 +37,7 @@ public class Main {
         }
         System.out.println(result);
     }
-    
+
     // 기울기를 구한다.
     static double calculator(int x1, int y1, int x2, int y2){
         return (y2-y1)*1.0/(x2-x1);
