@@ -1,12 +1,13 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
 
 /**
- * 삽입할 때, O(logn) 의 시간복잡도를 가진다.
- * O(nlogn)의 시간복잡도
+ * 처음에는 리스트로 구현해서 삽입하는 경우에만 이분탐색을 하려고 했지만 이분탐색은 최악인 경우 O(N)의 시간복잡도를 가지기 때문에 다른 방법으로 접근했다.
+ * 최소 우선순위 큐와 최대 우선순위 큐로 구현했을 때 삭제하는 경우는 O(logN)이다
  * */
-public class Main {
 
+public class BJ_7662_이중우선순위큐 {
 
     static Map<Integer, Integer> count;
     public static void main(String[] args) throws IOException{
@@ -30,17 +31,16 @@ public class Main {
                 value = Integer.parseInt(str[1]);
                 switch(str[0].charAt(0)){
                     case 'I':
-                        // 이분탐색으로 자리를 찾기 => O(logn)
-                        minOrder.offer(value);
-                        maxOrder.offer(value);
+                        minOrder.offer(value); // O(logN)
+                        maxOrder.offer(value); // O(logN)
                         count.put(value, count.getOrDefault(value, 0)+1);
                         break;
-                    case 'D': // 잘하면 O(1) 아니면 O(k)?
+                    case 'D':
                         if(count.size()!=0){
                             if(value == -1) {
-                                removeValue(minOrder);
+                                removeValue(minOrder); // O(logN)
                             }else{
-                                removeValue(maxOrder);
+                                removeValue(maxOrder); // O(logN)
                             }
                         }
                         break;
@@ -59,7 +59,7 @@ public class Main {
 
     static int removeValue(PriorityQueue<Integer> pq){
         int num;
-        while(true){
+        while(true){ // O(logN) + O(log(N-1)) + O(log(N-2)) + ... + O(log(1)) === O(log(N))
            num = pq.poll();
 
             int cnt = count.getOrDefault(num, 0);
