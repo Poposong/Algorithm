@@ -1,17 +1,10 @@
+package Baekjoon;
+
 import java.io.*;
 import java.util.*;
-/**
- 앞자리부터 가능한지 비교한다.
-
- 자리가 가능할 때
- 자리를 넣는다.
-
- 자리가 불가능할 때
- 앞자리가 기존보다 작다? 최대한 큰 수를 찾음
- 앞자리가 기존과 같다? 최대한 작은 수를 찾음
- 앞자리가 기존보다 크다? 최대한 작은 수를 찾음
- * */
-public class Main {
+// 완전탐색
+// O(999999*6) < 2억
+public class BJ_1107_리모컨 {
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +17,7 @@ public class Main {
             System.out.println(Math.min(Math.abs(N-100), String.valueOf(N).length()));
             return;
         }
-        
+
         String[] str = br.readLine().split(" ");
         Arrays.fill(remocon, true);
         for(int i = 0; i<M; i++){
