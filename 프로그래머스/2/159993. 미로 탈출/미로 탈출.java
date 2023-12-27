@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.*;
 /**
-시작 -> 레버 (DFS)
-레버 -> 끝(DFS)
+시작 -> 레버 (BFS)
+레버 -> 끝(BFS)
 */
 class Solution {
     static int N, M;
