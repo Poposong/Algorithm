@@ -124,10 +124,9 @@ class Solution {
                 return a[0]-b[0];
             }
         });
-            
+            // (0,0)을 기준으로 다시 위치를 바꾸기(방향을 돌리면서 위치가 바뀌기 때문)
             int baseX = currentTableSeg.get(0)[0];
             int baseY = currentTableSeg.get(0)[1];
-            
             for(int j = 0; j<currentTableSeg.size(); j++){
                 currentTableSeg.get(j)[0] -= baseX;
                 currentTableSeg.get(j)[1] -= baseY;
@@ -148,7 +147,7 @@ class Solution {
             
             if(!isCorrect){
                 // 맞지 않는 경우
-                // 90도로 회전
+                // 90도로 회전(x,y) -> (y, -x) -> (-x, -y) -> (-y, x)
                 for(int j = 0; j<currentTableSeg.size(); j++){
                     int temp = currentTableSeg.get(j)[0];
                     currentTableSeg.get(j)[0] = currentTableSeg.get(j)[1];
