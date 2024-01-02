@@ -1,11 +1,13 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
 
 /**
- * BFS (dir, r, c) 현재 어떤 방향에 좌표인지 저장한ㄷ.
- * dir의 값 : 0=>가로, 1=>세로, 2=>대각선
- * */
-public class Main {
+ (r,c)의 좌표까지 가로 or 세로 or 대각선에서 들어왔는지 구분해야한다.
+ 따라서, 각 좌표까지 어떤 방향에서 온 건지를 배열로 구분했다.
+ 즉, 이전 방향이 현재 좌표에서 갈 방향에 영향을 미친다면 배열로 방향에 따라서 구분을 해줘야 한다.
+ */
+public class BJ_17070_파이프옮기기1 {
     static int[][][] visited;
     static int[] dx = {0, 1, 1};
     static int[] dy = {1, 0, 1};
