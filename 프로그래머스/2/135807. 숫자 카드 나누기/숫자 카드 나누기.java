@@ -1,67 +1,51 @@
 import java.io.*;
 import java.util.*;
+// 1. arrayA에서 최소공배수, arrayB에서 최소공배수를 각각 구한다.
+// 2. 
 class Solution {
     public int solution(int[] arrayA, int[] arrayB) {
         int answer = 0;
+        Arrays.sort(arrayA);
+        Arrays.sort(arrayB);
         
-        ArrayList<Integer> pA = possibleValue(arrayA); // 2부터 arrayA의 최대 원소까지 나누어 떨어지는 수를 모두 구한다.
-        ArrayList<Integer> pB = possibleValue(arrayB); // 2부터 arrayB의 최대 원소까지 나누어 떨어지는 수를 모두 구한다.
+        int gcdA = arrayA[0];
+        int gcdB = arrayB[0];
         
-        int num;
-        boolean check;
-        for(int i = pA.size()-1; i>=0; i--){
-            num = pA.get(i);
-            check = true;
-            for(int valueB : arrayB){
-                if(valueB%num == 0){ // i로 나누어 떨어지는 수인데 B에서도 나누어 떨어진다? => NO
-                    check = false;
-                    break;
-                }
-            }
-            
-            if(check && answer < num){ // A에서 나누어 떨어지는 가장 큰 수가 B에서도 나누어 떨어지는 수 => OK
-                answer = num;
+        for(int i = 1; i<arrayA.length; i++){
+            gcdA = gcd(gcdA, arrayA[i]);
+            gcdB = gcd(gcdB, arrayB[i]);
+        }
+        
+        boolean check = true;
+        for(int value : arrayB){
+            if(value%gcdA == 0){
+                check = false;
                 break;
             }
         }
-
-        for(int i = pB.size()-1; i>=0; i--){
-            num = pB.get(i);
-            check = true;
-            for(int valueA : arrayA){
-                if(valueA%num == 0){
-                    check = false;
-                    break;
-                }
-            }
-
-            if(check && answer < num){
-                answer = num;
+        if(check){
+            answer = gcdA;
+        }
+        
+        check = true;
+        for(int value : arrayA){
+            if(value%gcdB == 0){
+                check = false;
                 break;
             }
         }
+        if(check){
+            answer = Math.max(answer, gcdB);
+        }
+        
+        
         
         
         return answer;
     }
     
-    ArrayList<Integer> possibleValue(int[] array){
-        ArrayList<Integer> result = new ArrayList<>();
-        Arrays.sort(array);
-        int bound = array[0];
-        boolean check;
-        for(int i = 2; i<=bound; i++){
-            check = true;
-            for(int number : array){
-                if(number%i != 0){
-                    check = false;
-                    break;
-                }
-            }
-            if(check){
-                result.add(i);
-            }
-        }
-        return result;
+    public int gcd(int a, int b){
+        if(a%b == 0) return b;
+        return gcd(b, a%b);
     }
 }
