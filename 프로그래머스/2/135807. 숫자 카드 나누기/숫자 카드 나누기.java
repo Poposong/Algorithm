@@ -4,8 +4,8 @@ class Solution {
     public int solution(int[] arrayA, int[] arrayB) {
         int answer = 0;
         
-        ArrayList<Integer> pA = possibleValue(arrayA);
-        ArrayList<Integer> pB = possibleValue(arrayB);
+        ArrayList<Integer> pA = possibleValue(arrayA); // 2부터 arrayA의 최대 원소까지 나누어 떨어지는 수를 모두 구한다.
+        ArrayList<Integer> pB = possibleValue(arrayB); // 2부터 arrayB의 최대 원소까지 나누어 떨어지는 수를 모두 구한다.
         
         int num;
         boolean check;
@@ -13,13 +13,13 @@ class Solution {
             num = pA.get(i);
             check = true;
             for(int valueB : arrayB){
-                if(valueB%num == 0){
+                if(valueB%num == 0){ // i로 나누어 떨어지는 수인데 B에서도 나누어 떨어진다? => NO
                     check = false;
                     break;
                 }
             }
             
-            if(check && answer < num){
+            if(check && answer < num){ // A에서 나누어 떨어지는 가장 큰 수가 B에서도 나누어 떨어지는 수 => OK
                 answer = num;
                 break;
             }
