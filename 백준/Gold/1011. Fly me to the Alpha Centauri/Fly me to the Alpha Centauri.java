@@ -1,6 +1,8 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
-public class Main {
+// 대부분의 경우에는 규칙이 있기 때문에 모르겠으면 표나 그림으로 나열해보기!!!!!!
+public class BJ_1011_Fly_me_to_the_Alpha_Centauri {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
@@ -30,3 +32,5 @@ public class Main {
 
     }
 }
+
+// 참고 : https://st-lab.tistory.com/79
