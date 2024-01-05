@@ -1,11 +1,11 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
 
-// 홀-홀, 짝-짝으로 차이가 2의 배수임
-public class Main {
+// 시간복잡도 : O( N * (M+N*M)) => O(N * (N*M)) = O(N * N * M) = O(50*50%50) = 125,000
+public class BJ_1034_램프 {
     static int N, M, K, answer;
     static int[][] graph;
-
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,7 +20,7 @@ public class Main {
             }
         }
         K = Integer.parseInt(br.readLine());
-
+        
         // 같은 모양이면 같이 켜지고 꺼진다.
         for(int i = 0; i<N; i++){
             int zeroCnt = 0;
@@ -29,9 +29,9 @@ public class Main {
             }
 
             int sameCnt = 0;
-            if(zeroCnt <= K && zeroCnt%2 == K%2){
+            if(zeroCnt <= K && zeroCnt%2 == K%2){ // K보다 작거나 같으면서 짝수↔짝수 or 홀수↔홀수이면 가능하다.
                 for(int j = 0; j<N; j++){
-                    if(isSame(graph[i], graph[j], zeroCnt)){ // 두 개의 모양이 같으면?
+                    if(isSame(graph[i], graph[j], zeroCnt)){ // 두 개의 모양이 같은지 확인한다.
                         sameCnt++;
                     }
                 }
@@ -44,6 +44,8 @@ public class Main {
         System.out.println(answer);
     }
 
+
+    // O(M)
     static boolean isSame(int[] arr1, int[] arr2, int i){
         for(int j = 0; j<M; j++){
             if(arr1[j] != arr2[j]){
