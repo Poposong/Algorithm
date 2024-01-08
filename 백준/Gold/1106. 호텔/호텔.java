@@ -1,10 +1,11 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
 /**
  * C, N(1<=C<=1,000, 1<=N<=20)
  * N개의 줄에는 각 도시에서 홍보할 때 대는 비용과 그 비용으로 얻을 수 있는 고객의 수 (1<= <=100) cost, person
  * */
-public class Main {
+public class BJ_1106_호텔 {
     static int result = Integer.MAX_VALUE;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
