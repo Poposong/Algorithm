@@ -1,0 +1,16 @@
+-- car와 history를 join해서 11월 1일부터 11월 30일까지 빌릴 수 있는지?
+-- plan을 확인해서 해당 자동차가 30일 이상 빌렸을 때 50만원 이상 200만원 미만인지?
+
+SELECT C.CAR_ID, C.CAR_TYPE, ROUND(c.daily_fee * 30 * (100 - p.discount_rate) / 100) AS 'FEE'
+FROM CAR_RENTAL_COMPANY_CAR as C
+JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY H ON C.CAR_ID = H.CAR_ID
+JOIN CAR_RENTAL_COMPANY_DISCOUNT_PLAN P ON C.CAR_TYPE = P.CAR_TYPE
+WHERE C.CAR_ID NOT IN(
+    SELECT CAR_ID 
+    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+    WHERE END_DATE > '2022-11-01' AND START_DATE < '2022-12-01'
+    )
+    AND P.DURATION_TYPE = '30일 이상'
+group by CAR_ID
+having C.CAR_TYPE IN ('SUV', '세단') AND (FEE>=500000 AND FEE<2000000) 
+ORDER BY `FEE` DESC, c.car_type, c.car_id DESC;
