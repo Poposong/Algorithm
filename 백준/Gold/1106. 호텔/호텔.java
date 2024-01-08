@@ -12,7 +12,7 @@ public class Main {
         int C = Integer.parseInt(str[0]);
         int N = Integer.parseInt(str[1]);
 
-        int[] dp = new int[C*2+101];
+        int[] dp = new int[C*2+101]; // C*2의 값보다 N의 값이 큰 경우가 발생하므로 N의 크기만큼 크기를 확장함
         Arrays.fill(dp, Integer.MAX_VALUE);
 
         // 비용, 고객 수
