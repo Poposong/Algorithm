@@ -1,10 +1,11 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
 /**
  * 1<=N<=1,000,000
  * 1<=A,B,C,D,E,F<=50
  * */
-public class Main {
+public class BJ_1041_주사위 {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
@@ -41,12 +42,10 @@ public class Main {
             diceSum[2] = Math.min(diceSum[2], temp[i]);
             diceSum[2] = Math.min(diceSum[2], Math.min(dice[2] + dice[idx[i]], dice[3] + dice[idx[i]]));
         }
-
-        //System.out.println(Arrays.toString(diceSum));
+        
         long result = 0;
 
-        // result += diceSum[1] * (4 * (N-1) * (N-2) + (long)Math.pow(N-2, 2));
-        result += diceSum[1] * (5L * (N-2) * (N-2) + 4L * (N-2));
+        result += diceSum[1] * (4L * (N-1) * (N-2) + (long)Math.pow(N-2, 2)); // 정수 오버플로우 주의하기!!!
 
         result += diceSum[2] * (8L * (N-2) + 4);
 
@@ -54,16 +53,6 @@ public class Main {
 
 
         System.out.println(result);
-
-
-
-
-
-
-
-
-
-
 
     }
 }
