@@ -1,16 +1,11 @@
 import java.io.*;
 import java.util.*;
+// 정수 -> 바이너리 문자열 : Integer.toString(num, 2)
+// 바이너리 문자열 -> 정수 : Integer.parseInt(str, 2);
 
 class Solution {
     public long[] solution(long[] numbers) {
         long[] answer = new long[numbers.length];
-        // for(int i = 1; i<100; i++){
-        //     System.out.println(i+"=>"+Long.toBinaryString((long)i));
-        // }
-        
-        // 1. 짝수인 경우에는 숫자 + 1
-        // 2. 홀수인데 1만 있는 경우
-        //    => 
         
         String newNumber;
         for(int i = 0; i<numbers.length; i++){
