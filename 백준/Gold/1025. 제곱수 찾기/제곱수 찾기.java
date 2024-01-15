@@ -19,10 +19,7 @@ public class Main {
         graph = new char[N][M];
         for(int i = 0; i<N; i++){
             graph[i] = br.readLine().toCharArray();
-            //System.out.println(Arrays.toString(graph[i]));
         }
-
-
 
         int result = -1;
 
