@@ -1,18 +1,25 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
-public class Main {
+
+/**
+ * 1. 루트 노드는 0번째만 될 수 있는 건 아니다.
+ * 2. 리프 노드를 만들었을 때 상위 노드가 리프 노드가 될 수 있는지 확인해야 한다.
+ * 3. 리프 노드로 하나만 지워졌을 경우도 생각해야 한다.
+ * */
+public class BJ_1068_트리 {
     static int N, answer;
     static Map<Integer, ArrayList<Integer>> tree;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         answer = N; // 리프노드로 가능한 정점의 수
-        
+
         tree = new HashMap<>(); // / 부모노드와 자식노드들을 저장할 맵
-        for(int i = 0; i<N; i++){ 
+        for(int i = 0; i<N; i++){
             tree.put(i, new ArrayList<Integer>());
         }
-        
+
         boolean[] leafNodeCheck = new boolean[N]; // 리프노드를 체크하기 위한 배열
         Arrays.fill(leafNodeCheck, false);
 
