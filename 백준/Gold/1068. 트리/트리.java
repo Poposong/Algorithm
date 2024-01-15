@@ -67,4 +67,64 @@ public class BJ_1068_트리 {
             removeNode(data);
         }
     }
+
+    /**
+    [큐를 이용한 방법] 
+     static int N, answer;
+    static List<Integer>[] tree;
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        tree = new ArrayList[N];
+        for(int i = 0; i<N; i++){
+            tree[i] = new ArrayList<Integer>();
+        }
+
+        int rootNode = -1;
+        String[] str = br.readLine().split(" ");
+        for(int i = 0; i<N; i++){
+            int num = Integer.parseInt(str[i]);
+            if(num == -1){
+                rootNode = i;
+            }else{
+                tree[num].add(i); // num의 자식이 i이다.
+            }
+        }
+
+        int deleteNode = Integer.parseInt(br.readLine());
+        if(deleteNode == rootNode){
+            System.out.println(0);
+            return;
+        }
+
+        findLeafNode(rootNode, deleteNode);
+
+        System.out.println(answer);
+
+
+    }
+
+    static void findLeafNode(int rootNode, int deleteNode){
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.offer(rootNode);
+
+        boolean isCheck;
+        while(!queue.isEmpty()){
+            Integer num = queue.poll();
+            isCheck = false;
+
+            for(Integer data : tree[num]){
+                if(data != deleteNode){
+                    queue.add(data);
+                    isCheck = true;
+                }
+            }
+
+            if(!isCheck){
+                answer++;
+            }
+        }
+    }
+    */
 }
