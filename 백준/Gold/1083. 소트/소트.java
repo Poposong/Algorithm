@@ -1,6 +1,7 @@
+package Baekjoon;
 import java.io.*;
 import java.util.*;
-public class Main {
+public class BJ_1083_소트 {
     static int N, S;
     static int[] number;
     public static void main(String[] args) throws IOException{
@@ -14,12 +15,10 @@ public class Main {
         }
 
         for(int i = 0; i<N; i++){
-            int findIdx = findChangeIdx(i, i+S);
+            int findIdx = findChangeIdx(i, i+S); // S번째로 바꿀 수 있는 거리까지 탐색에서 가장 큰 숫자가 있는 인덱스를 찾는다.
             if(findIdx!=i){
                 serialRevSwap(i, findIdx);
-                int differ = findIdx - i;
-                S -= differ;
-               // System.out.println(differ+":"+Arrays.toString(number));
+                S -= (findIdx - i);
             }
             if(S <= 0){
                 break;
