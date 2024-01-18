@@ -1,8 +1,7 @@
 import java.io.*;
 import java.util.*;
 public class Main {
-
-    static class Node{
+    static class Node{ // data는 괄호, check가 true이면 곱해야 하는 괄호라는 의미이고 false이면 더하는 괄호라는 의미이다.
         char data;
         boolean check;
 
@@ -11,77 +10,52 @@ public class Main {
             this.check = check;
         }
     }
-    static Stack<Node> stack;
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         char[] word = br.readLine().toCharArray();
-        stack = new Stack<>();
-        Stack<Integer> store = new Stack();
-        // int idx = 0;
+
+        Stack<Node> stack = new Stack<>();
+        Stack<Integer> store = new Stack(); // 각 자리까지 계산한 값을 저장하는 스택
         for(char c : word){
-            // System.out.println((idx++)+":"+stack.size()+","+store.size()+"=>"+ c);
             if(c == '(' || c == '['){
-                if(stack.isEmpty()){
-                    stack.push(new Node(c, false));
-                }else if(stack.peek().data == '('){
-                    if(!stack.peek().check){
-                        store.add(-1);
-                        // System.out.println("store add -1");
+                if(!stack.isEmpty()){
+                    if(!stack.peek().check){ // 중복되는 여는 괄호가 있으면 이전의 괄호는 true로 바꿔준다.
+                        store.add(-1); // 곱하는 시점까지라는 의미로 -1을 넣음
                         stack.peek().check = true;
                     }
-                    stack.push(new Node(c, false));
-                }else if(stack.peek().data == '['){
-                    if(!stack.peek().check){
-                        store.add(-1);
-                        // System.out.println("store add -1");
-                        stack.peek().check = true;
-                    }
-                    stack.push(new Node(c, false));
                 }
+                stack.push(new Node(c, false));
             }else{
-                if(stack.isEmpty() || !possibleCheck(c)){
-                    // System.out.println(stack.peek().data);
+                if(!possibleCheck(stack, c)){
                     System.out.println(0);
                     return;
                 }
 
                 if(stack.peek().check){
+                    stack.pop();
+
                     int sum = 0;
                     while(!store.isEmpty()){
-                        if(store.peek() == -1){
+                        if(store.peek() == -1){ // 곱하는 시점까지 수를 다 더한다.
                             store.pop();
                             break;
                         }
                         sum += store.pop();
                     }
 
-
-                    if(stack.peek().data == '('){
-                        // System.out.println("store add "+ store.size()+","+(2*sum));
+                    if(c == ')'){
                         store.add(2 * sum);
                     }else{
-                        // System.out.println("store add "+ store.size()+"," +(3*sum));
                         store.add(3 * sum);
                     }
-
-                    stack.pop();
-
-//                    while(!store.isEmpty()){
-//                        System.out.println(store.pop());
-//                    }
-
                 }else{
-                    if(stack.peek().data == '(' && c == ')'){
-                        stack.pop();
-                        // System.out.println("store add 2");
+                    stack.pop();
+                    if(c == ')'){
                         store.add(2);
-                    }else if(stack.peek().data == '[' && c == ']'){
-                        stack.pop();
-                        // System.out.println("store add 3");
+                    }else if(c == ']'){
                         store.add(3);
                     }
                 }
-
 
             }
         }
@@ -98,8 +72,8 @@ public class Main {
 
     }
 
-    static boolean possibleCheck(char c){
-        if((stack.peek().data == '(' && c == ')') || (stack.peek().data == '[' && c == ']')) return true;
+    static boolean possibleCheck(Stack<Node> stack, char c){
+        if(!(stack.isEmpty()) && ((stack.peek().data == '(' && c == ')') || (stack.peek().data == '[' && c == ']'))) return true;
         return false;
     }
 }
