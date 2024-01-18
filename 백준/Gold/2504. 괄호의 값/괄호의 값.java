@@ -1,3 +1,5 @@
+// 방법1) 내가 작성한 코드
+
 import java.io.*;
 import java.util.*;
 public class Main {
@@ -77,3 +79,56 @@ public class Main {
         return false;
     }
 }
+
+
+// 방법2) https://myeongju00.tistory.com/12
+
+package Baekjoon;
+import java.io.*;
+import java.util.*;
+public class BJ_2504_괄호의값 {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char[] word = br.readLine().toCharArray();
+
+        int result = 0;
+        int value = 1;
+        Stack<Character> stack = new Stack();
+        for(int i = 0; i<word.length; i++){
+            char c = word[i];
+            if(c == '('){
+                stack.add(c);
+                value *= 2;
+            }else if(c == '['){
+                stack.add(c);
+                value *= 3;
+            }else if(c == ')'){
+                if(stack.isEmpty() || stack.peek() != '(') {
+                    result = 0;
+                    break;
+                }
+                if(word[i-1] == '(') result += value;
+
+                value /= 2;
+                stack.pop();
+            }else if(c == ']'){
+                if(stack.isEmpty() || stack.peek() != '[') {
+                    result = 0;
+                    break;
+                }
+                
+                if(word[i-1] == '[') result += value;
+                value /= 3;
+
+                stack.pop();
+            }
+        }
+
+        if(!stack.isEmpty()){
+            System.out.println(0);
+        }else{
+            System.out.println(result);
+        }
+    }
+}
+
