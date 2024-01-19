@@ -20,10 +20,10 @@ public class Main {
             int secondNumber = str.charAt(i-2) - '0';
 
             if(secondNumber == 0){
-//                if(firstNumber == 0){ // 00이 연속으로 나왔다.
-//                    System.out.println(0);
-//                    return;
-//                }
+                if(firstNumber == 0){ // 00이 연속으로 나왔다.
+                    System.out.println(0);
+                    return;
+                }
                 continue;
             };
 
