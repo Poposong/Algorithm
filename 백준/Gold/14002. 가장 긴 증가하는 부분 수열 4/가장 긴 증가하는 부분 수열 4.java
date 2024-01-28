@@ -1,91 +1,67 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] A = new int[n];
+        String[] str = br.readLine().split(" ");
+        for(int i = 0; i<n; i++){
+            A[i] = Integer.parseInt(str[i]);
+        }
+        List<Integer>[] list = new ArrayList[n];
+        for(int i = 0; i<n; i++){
+            list[i] = new ArrayList<Integer>();
+        }
 
-	static int N;
-	static int[] inputs;
-	static int[] index;
-	static int[] arr;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 0);
 
-	static void binarySearch(int now, int arrLen) {
-		int mid = arrLen / 2;
-		int low = 0;
-		int high = arrLen;
+        int[] seat = new int[n];
+        for(int i = 0; i<n; i++){
+            seat[i] = i;
+        }
 
-		while (low <= high) {
-			mid = (low + high) / 2;
+        int max = 0;
+        for(int i = 0; i<n; i++){
+            int n1 = A[i];
+            for(int j = i+1; j<n; j++){
+                int n2 = A[j];
+                if(n1 < n2 && dp[j] < dp[i]+1){
+                    dp[j] = dp[i]+1;
+                    seat[j] = i;
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
 
-			if (low == high) {
-				break;
-			}
+       // System.out.println(max);
 
-			if (arr[mid] == inputs[now]) {
-				index[now] = mid;
-				return;
-			} else if (arr[mid] > inputs[now]) {
-				high = mid - 1;
-			} else {
-				low = mid + 1;
-			}
+        StringBuilder sb = new StringBuilder();
 
-		}
-		if (arr[mid] == inputs[now]) {
-			index[now] = mid;
-		} else if (arr[mid] > inputs[now]) {
-			index[now] = mid;
-			arr[mid] = inputs[now];
-		} else {
-			index[now] = mid + 1;
-			arr[mid + 1] = inputs[now];
-		}
 
-	}
+        for(int i = n-1; i>=0; i--){
+            if(dp[i] == max){
+                int idx = i;
+                boolean check = true;
+                while(check){
+                    sb.insert(0, A[idx]+" ");
+                    if(idx == seat[idx]){
+                        check = false;
+                        break;
+                    }
+                    idx = seat[idx];
+                }
+                if(!check){
+                    break;
+                }
+            }
+        }
+        sb.insert(0, (max+1)+"\n");
+        System.out.println(sb.toString());
+        //System.out.println(Arrays.toString(dp));
+        //System.out.println(Arrays.toString(seat));
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		StringTokenizer st;
-		N = Integer.parseInt(br.readLine());
-
-		inputs = new int[N];
-		index = new int[N];
-		arr = new int[N];
-		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			inputs[i] = Integer.parseInt(st.nextToken());
-		}
-
-		int arrLen = 0;
-		arr[0] = inputs[0];
-		index[0] = 0;
-		for (int i = 1; i < N; i++) {
-			if (inputs[i] > arr[arrLen]) { // 큰 수이면 뒤에 붙인다.
-				arr[++arrLen] = inputs[i];
-				index[i] = arrLen;
-			} else if (inputs[i] == arr[arrLen]) { // 값이 같으면 index값만 넣어준다.
-				index[i] = arrLen;
-			} else { // 작은 수이면 이분 탐색한다.
-				binarySearch(i, arrLen + 1);
-			}
-		}
-
-		sb.append((arrLen + 1)).append("\n");
-		int idx = arrLen;
-		int[] res = new int[arrLen + 1];
-		for (int i = N - 1; i >= 0; i--) {
-			if (index[i] == idx) {
-				res[idx] = inputs[i];
-				idx--;
-			}
-		}
-
-		for (int i = 0; i <= arrLen; i++) {
-			sb.append(res[i] + " ");
-		}
-		System.out.println(sb);
-	}
-
+    }
 }
