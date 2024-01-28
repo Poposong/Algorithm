@@ -8,13 +8,17 @@ public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int s = Integer.parseInt(br.readLine());
-        int[][] minPath = new int[s+1][s+1];
+        int[][] minPath = new int[s+1][s+1]; // [이모티콘의 수][클립보드에 복사된 수]
+        
         for(int i = 0; i<s+1; i++){
             Arrays.fill(minPath[i], Integer.MAX_VALUE);
         }
+
         minPath[1][0] = 0;
         Queue<int[]> queue = new ArrayDeque<>();
         queue.add(new int[]{1, 0});
+
+        // 이전에 방문한 적이 없는 경우에만 체크한다.
         while(!queue.isEmpty()){
             int[] data = queue.poll();
             // 1. 화면에 있는 임티 모두 복사해서 클립보드에 넣기
@@ -49,6 +53,5 @@ public class Main {
             min = Math.min(min, minPath[s][i]);
         }
         System.out.println(min);
-        // System.out.println(Arrays.toString(minPath[s]));
     }
 }
