@@ -17,8 +17,9 @@ public class Main {
         minPath[1][0] = 0;
         Queue<int[]> queue = new ArrayDeque<>();
         queue.add(new int[]{1, 0});
-
+        
         // 이전에 방문한 적이 없는 경우에만 체크한다.
+        // BFS의 시간복잡도는 O(v+e)인데, e는 하나의 정점마다 3가지가 나오기 때문에 3v이다. 따라서, O(4v)가 시간복잡도이므로 O(v)라고 할 수 있다.
         while(!queue.isEmpty()){
             int[] data = queue.poll();
             // 1. 화면에 있는 임티 모두 복사해서 클립보드에 넣기
