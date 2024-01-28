@@ -5,14 +5,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        int[] A = new int[n];
         String[] str = br.readLine().split(" ");
+        
+        int[] A = new int[n];
         for(int i = 0; i<n; i++){
             A[i] = Integer.parseInt(str[i]);
-        }
-        List<Integer>[] list = new ArrayList[n];
-        for(int i = 0; i<n; i++){
-            list[i] = new ArrayList<Integer>();
         }
 
         int[] dp = new int[n];
@@ -36,11 +33,7 @@ public class Main {
             max = Math.max(max, dp[i]);
         }
 
-       // System.out.println(max);
-
         StringBuilder sb = new StringBuilder();
-
-
         for(int i = n-1; i>=0; i--){
             if(dp[i] == max){
                 int idx = i;
@@ -60,8 +53,6 @@ public class Main {
         }
         sb.insert(0, (max+1)+"\n");
         System.out.println(sb.toString());
-        //System.out.println(Arrays.toString(dp));
-        //System.out.println(Arrays.toString(seat));
 
     }
 }
