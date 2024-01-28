@@ -23,7 +23,7 @@ public class Main {
             int[] data = queue.poll();
             // 1. 화면에 있는 임티 모두 복사해서 클립보드에 넣기
             int idx = data[0];
-            if(idx < 10000 && minPath[data[0]][data[1]]+1 < minPath[idx][idx]){
+            if(idx < s+1 && minPath[data[0]][data[1]]+1 < minPath[idx][idx]){
                 minPath[idx][idx] = minPath[data[0]][data[1]]+1;
                 queue.offer(new int[]{idx, idx});
             }
