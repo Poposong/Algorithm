@@ -4,7 +4,6 @@ import java.util.*;
 // 자신을 기점으로 상하좌우 bfs 탐색해서 4개 이상이면 true로 해둔다.
 // 다 탐색하고 true인 것들만 .으로 변경해준다.
 
-
 public class Main {
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
@@ -44,32 +43,24 @@ public class Main {
             }
 
             // puyo를 다 찾았으므로 실제 chart에서 제거해준다.
-            // System.out.println(seat.size());
             for(int i = 0; i<6; i++){
-                ArrayList<Character> temp = new ArrayList<>();
-                for(int j = 11; j>=0; j--){
-                    if(!visited[j][i]){
-                        temp.add(chart[j][i]);
+                ArrayList<Character> notPuyo = new ArrayList<>();
+                for(int j = 11; j>=0; j--){ 
+                    if(!visited[j][i]){ // puyo가 아닌 데이터만 temp에 저장한다.
+                        notPuyo.add(chart[j][i]);
                     }
                 }
                 char c;
-                for(int j = 11; j>=0; j--){
-                    if(!temp.isEmpty()){
-                        c = temp.remove(0);
+                for(int j = 11; j>=0; j--){ // 아래에서 부터 temp에 있으면 넣고 없으며 .으로 다시 채워준다.
+                    if(!notPuyo.isEmpty()){
+                        c = notPuyo.remove(0);
                         chart[j][i] = c;
                     }else{
                         chart[j][i] = '.';
                     }
                 }
             }
-
-//            for(int i = 0; i<12; i++){
-//                for(int j = 0; j<6; j++){
-//                    System.out.print(chart[i][j]+"");
-//                }
-//                System.out.println();
-//            }
-//            System.out.println();
+            
             ans++;
 
         }
@@ -102,7 +93,7 @@ public class Main {
         if(temp.size()>=4){
             return true;
         }else{
-            while(!temp.isEmpty()){
+            while(!temp.isEmpty()){ // 방문했던 좌표를 다시 원래대로 복구시키기
                 int[] data = temp.remove(0);
                 visited[data[0]][data[1]] = false;
             }
