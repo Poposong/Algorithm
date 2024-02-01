@@ -1,0 +1,53 @@
+package Baekjoon;
+import java.io.*;
+import java.util.*;
+
+public class BJ_2170_선긋기 {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[][] lines = new int[N][2];
+        for(int i = 0; i<N; i++){
+            String[] str = br.readLine().split(" ");
+            int x = Integer.parseInt(str[0]);
+            int y = Integer.parseInt(str[1]);
+
+            lines[i][0] = x;
+            lines[i][1] = y;
+        }
+
+        // 받은 선을 (오름차순, 오름차순) 으로 정렬한다.
+        Arrays.sort(lines,new Comparator<int[]>(){
+            public int compare(int[] a, int[] b){
+                if(a[0] == b[0]){
+                    return a[1]-b[1];
+                }
+                return a[0]-b[0];
+            }
+        });
+
+
+        // 정렬하는 과정을 통해서 범위를 점점 줄여나간다. 따라서, 전체적인 범위가 아닌 이전의 범위만 비교하는 과정으로 진행해도 괜찮다.
+        int min = lines[0][0];
+        int max = lines[0][1];
+        int ans = 0;
+        for(int i = 1; i<N; i++){
+            if(lines[i][0] > max){ // 범위를 벗어난 경우
+                ans += max-min;
+                min = lines[i][0];
+                max = lines[i][1];
+                continue;
+            }
+
+            if(lines[i][1] > max){ // 범위를 확장하는 경우
+                max = lines[i][1];
+            }
+        }
+        ans += max-min;
+        System.out.println(ans);
+
+
+
+
+    }
+}
