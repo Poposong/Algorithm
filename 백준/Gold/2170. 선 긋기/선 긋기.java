@@ -3,7 +3,7 @@ import java.util.*;
 
 /*
 * 1. 받은 선을 (오름차순, 오름차순) 으로 정렬한다.
-* 2. 우선순위 큐에 가능한 선이 있다면 확장한다. or 우선순위 큐에 가능한 선이 없다면 새로운 선을 큐에 추가한다.
+* 2. 리스트에 가능한 선이 있다면 확장한다. or 리스트에 가능한 선이 없다면 새로운 선을 큐에 추가한다.
 * */
 public class Main {
     public static void main(String[] args) throws IOException{
@@ -15,7 +15,7 @@ public class Main {
             int x = Integer.parseInt(str[0]);
             int y = Integer.parseInt(str[1]);
 
-            if(y<x){
+            if(y<x){ 
                 int temp = x;
                 x = y;
                 y = temp;
@@ -25,6 +25,7 @@ public class Main {
                x, y
             });
         }
+        
         // 1. 받은 선을 (오름차순, 오름차순) 으로 정렬한다.
         Collections.sort(lines, new Comparator<int[]>(){
             public int compare(int[] a, int[] b){
@@ -34,17 +35,9 @@ public class Main {
                 return a[0]-b[0];
             }
         });
+        
 
-//        PriorityQueue<int[]> exLine = new PriorityQueue<>(new Comparator<int[]>(){
-//            public int compare(int[] a, int[] b){
-//                if(a[0] == b[0]){
-//                    return a[1]-b[1];
-//                }
-//                return a[0]-b[0];
-//            }
-//        });
-
-        ArrayList<int[]> exLine = new ArrayList<>();
+        ArrayList<int[]> exLine = new ArrayList<>(); // 확장한 선들을 저장하는 리스트이다.
 
         for(int[] line : lines){
             boolean possible = false;
